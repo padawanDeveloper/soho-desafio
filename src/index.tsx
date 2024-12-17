@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text } from 'react-native';
 
-const App: React.FC = () => <Text>App</Text>;
+import Navigation from './navigation';
+
+const App: React.FC = () => <Navigation />;
 
 export default App;
