@@ -1,8 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStaticNavigation } from '@react-navigation/native';
 import { Text, StyleSheet, SafeAreaView } from 'react-native';
 
 export type RootStackParamList = {
-  Home: undefined;
+  root: undefined;
 };
 
 const Page = () => (
@@ -11,9 +12,15 @@ const Page = () => (
   </SafeAreaView>
 );
 
-export const AppStack = createNativeStackNavigator({
+const AppNavigator = createNativeStackNavigator({
   screens: {
-    Products: Page,
+    Root: {
+      screen: Page,
+      if: () => true,
+      options: {
+        headerShown: false,
+      },
+    },
   },
 });
 
@@ -23,3 +30,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
   },
 });
+
+const RootNavigation = createStaticNavigation(AppNavigator);
+export default RootNavigation;

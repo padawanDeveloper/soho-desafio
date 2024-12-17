@@ -1,19 +1,15 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Text, StyleSheet, SafeAreaView } from 'react-native';
 
-export type RootStackParamList = {
-  Home: undefined;
-};
-
 const Page = () => (
   <SafeAreaView style={styles.container}>
     <Text>Screen</Text>
   </SafeAreaView>
 );
 
-export const AppStack = createNativeStackNavigator({
+export const AuthStack = createNativeStackNavigator({
   screens: {
-    Products: Page,
+    Signin: Page,
   },
 });
 
