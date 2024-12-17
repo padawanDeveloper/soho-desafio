@@ -3,7 +3,7 @@ import { Text, StyleSheet, SafeAreaView } from 'react-native';
 
 const Page = () => (
   <SafeAreaView style={styles.container}>
-    <Text>Screen</Text>
+    <Text>Screen2</Text>
   </SafeAreaView>
 );
 

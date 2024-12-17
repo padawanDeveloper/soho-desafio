@@ -1,33 +1,37 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStaticNavigation } from '@react-navigation/native';
-import { Text, StyleSheet, SafeAreaView } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 
-export type RootStackParamList = {
-  root: undefined;
+import { AuthStack } from './AuthStack';
+import { AppStack } from './AppStack';
+
+export type AppStackParamList = {
+  Root: undefined;
+  Auth: undefined;
+  AuthLoading: undefined;
 };
 
-const Page = () => (
-  <SafeAreaView style={styles.container}>
-    <Text>Screen</Text>
-  </SafeAreaView>
-);
-
 const AppNavigator = createNativeStackNavigator({
+  initialRouteName: 'AuthLoading',
   screens: {
-    root: {
-      screen: Page,
-      if: () => true,
+    AuthLoading: {
+      screen: ActivityIndicator,
       options: {
         headerShown: false,
       },
     },
-  },
-});
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'red',
+    Auth: {
+      screen: AuthStack,
+      options: {
+        headerShown: false,
+      },
+    },
+    Root: {
+      screen: AppStack,
+      options: {
+        headerShown: false,
+      },
+    },
   },
 });
 

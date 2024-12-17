@@ -7,7 +7,7 @@ export type RootStackParamList = {
 
 const Page = () => (
   <SafeAreaView style={styles.container}>
-    <Text>Screen</Text>
+    <Text>Screen1</Text>
   </SafeAreaView>
 );
 

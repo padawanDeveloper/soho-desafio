@@ -1,35 +1,7 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createStaticNavigation } from '@react-navigation/native';
-import { Text, StyleSheet, SafeAreaView } from 'react-native';
+import React from 'react';
 
-export type RootStackParamList = {
-  root: undefined;
-};
+import Navigation from './navigation';
 
-const Page = () => (
-  <SafeAreaView style={styles.container}>
-    <Text>Screen</Text>
-  </SafeAreaView>
-);
+const App = () => <Navigation />;
 
-const AppNavigator = createNativeStackNavigator({
-  screens: {
-    Root: {
-      screen: Page,
-      if: () => true,
-      options: {
-        headerShown: false,
-      },
-    },
-  },
-});
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'red',
-  },
-});
-
-const RootNavigation = createStaticNavigation(AppNavigator);
-export default RootNavigation;
+export default App;
