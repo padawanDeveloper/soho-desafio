@@ -54,7 +54,7 @@ const ProductList: React.FC = () => {
   const handleSetCurrentProduct = (item: Product) => {
     navigation.navigate(PRODUCT_DETAIL, { product: item });
   };
-
+  console.log({ products });
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -76,6 +76,7 @@ const ProductList: React.FC = () => {
         )}
         keyExtractor={(item: Product) => String(item.id)}
         contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
+        numColumns={2}
       />
     </SafeAreaView>
   );
