@@ -1,14 +1,21 @@
 import React, { useCallback } from 'react';
 import { FlatList, SafeAreaView, View, ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/AppStack';
 
 import styles from './styles';
 import ProductCard from './components/ProductCard';
 import { Product } from '../../types/Product';
+import { PRODUCT_DETAIL } from '../../constants/screens';
 
 const ProductList: React.FC = () => {
-  const handleSetCurrentProduct = useCallback((item: Product) => {
-    console.log(item);
-  }, []);
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const handleSetCurrentProduct = (item: Product) => {
+    navigation.navigate(PRODUCT_DETAIL, { product: item });
+  };
 
   return (
     <SafeAreaView style={styles.container}>

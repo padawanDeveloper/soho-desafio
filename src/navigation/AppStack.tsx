@@ -1,28 +1,21 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Text, StyleSheet, SafeAreaView } from 'react-native';
 
-import { PRODUCTS } from '../constants/screens';
-import { Products } from '../screens';
+import { PRODUCTS, PRODUCT_DETAIL } from '../constants/screens';
+import { Products, ProductDetail } from '../screens';
+import { Product } from '../types/Product';
+
+interface IPdoductScreen {
+  product: Product;
+}
 
 export type RootStackParamList = {
-  Home: undefined;
+  [PRODUCT_DETAIL]: IPdoductScreen;
+  [PRODUCTS]: undefined;
 };
-
-const Page = () => (
-  <SafeAreaView style={styles.container}>
-    <Text>Screen1</Text>
-  </SafeAreaView>
-);
 
 export const AppStack = createNativeStackNavigator({
   screens: {
     [PRODUCTS]: Products,
-  },
-});
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'red',
+    [PRODUCT_DETAIL]: ProductDetail,
   },
 });
