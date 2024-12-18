@@ -13,7 +13,7 @@ export type AppStackParamList = {
 };
 
 const AppNavigator = createNativeStackNavigator({
-  initialRouteName: AUTH,
+  initialRouteName: AUTH_LOADING,
   screens: {
     [AUTH_LOADING]: {
       screen: AuthLoadingScreen,

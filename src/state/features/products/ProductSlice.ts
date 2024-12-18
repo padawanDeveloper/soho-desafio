@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
 import { Product } from '../../../types/Product';
+import { product } from '../../../api';
 
 export const fetchProducts = createAsyncThunk(
   'product/fetchProducts',
   async () => {
-    // const response = await products.getProducts();
-    // return response.data;
-    return [];
+    const response = await product.getProducts();
+    return response.data;
   },
 );
 

@@ -25,6 +25,12 @@ const validationSchema = Yup.object({
     .required('La contraseña es obligatoria'),
 });
 
+const error = () =>
+  Alert.alert(
+    'Error al autenticar el usuario',
+    'Usuario o contraseña incorrecta',
+  );
+
 const SignInScreen: React.FC = () => {
   const loading = useSelector((state: IMyState) => state.user.loading);
   const dispatch = useDispatch<AppDispatch>();
@@ -36,16 +42,14 @@ const SignInScreen: React.FC = () => {
     const { username, password } = values;
     try {
       let credentials = { username, password };
-      dispatch(loginUser(credentials)).then(resp => {
-        if (resp) {
-          navigation.navigate(ROOT);
-        }
-      });
-    } catch (error) {
-      Alert.alert(
-        'Error al autenticar el usuario',
-        'Usuario o contraseña incorrecta',
-      );
+      const resp: any = await dispatch(loginUser(credentials));
+      if (resp?.error) {
+        error();
+      } else if (resp.payload) {
+        navigation.navigate(ROOT);
+      }
+    } catch (e) {
+      error();
     }
   };
 
@@ -54,7 +58,7 @@ const SignInScreen: React.FC = () => {
       <Text style={styles.title}>Iniciar sesión</Text>
 
       <Formik
-        initialValues={{ username: '', password: '' }}
+        initialValues={{ username: 'mor_2314', password: '83r5^_' }}
         validationSchema={validationSchema}
         onSubmit={_handleSubmit}>
         {({

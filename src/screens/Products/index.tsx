@@ -1,17 +1,57 @@
-import React, { useCallback } from 'react';
-import { FlatList, SafeAreaView, View, ActivityIndicator } from 'react-native';
+import React, { useEffect } from 'react';
+import {
+  FlatList,
+  SafeAreaView,
+  View,
+  ActivityIndicator,
+  Text,
+  Button,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../navigation/AppStack';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { AppDispatch } from '../../state/store';
 import styles from './styles';
 import ProductCard from './components/ProductCard';
 import { Product } from '../../types/Product';
 import { PRODUCT_DETAIL } from '../../constants/screens';
+import {
+  fetchProducts,
+  IState,
+} from '../../state/features/products/ProductSlice';
+import { setItem } from '../../utils/storage';
+import { USER_TOKEN } from '../../constants/common';
+import { AUTH } from '../../constants/screens';
+import { RootStackParamList } from '../../navigation/AppStack';
+import { AppStackParamList } from '../../navigation';
+
+interface IMyState {
+  product: IState;
+}
 
 const ProductList: React.FC = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+
+  useEffect(() => {
+    const handleBack = () => {
+      setItem('', USER_TOKEN);
+      navigation.navigate(AUTH);
+    };
+
+    navigation.setOptions({
+      headerLeft: () => <Button onPress={handleBack} title="Salir" />,
+    });
+  }, [navigation]);
+
+  const products = useSelector((state: IMyState) => state.product.products);
+  const isLoading = useSelector((state: IMyState) => state.product.loading);
+  const error = useSelector((state: IMyState) => state.product.error);
 
   const handleSetCurrentProduct = (item: Product) => {
     navigation.navigate(PRODUCT_DETAIL, { product: item });
@@ -22,38 +62,14 @@ const ProductList: React.FC = () => {
       <FlatList
         ListEmptyComponent={
           <View style={styles.empty}>
-            <ActivityIndicator animating={true} />
+            {isLoading ? (
+              <ActivityIndicator animating={true} />
+            ) : (
+              <Text>{error ? 'Ocurrió un error inesperado' : '0 results'}</Text>
+            )}
           </View>
         }
-        data={[
-          {
-            id: 1,
-            title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
-            price: 109.95,
-            description:
-              'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
-            category: "men's clothing",
-            image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-            rating: {
-              rate: 3.9,
-              count: 120,
-            },
-          },
-          {
-            id: 2,
-            title: 'Mens Casual Premium Slim Fit T-Shirts ',
-            price: 22.3,
-            description:
-              'Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.',
-            category: "men's clothing",
-            image:
-              'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
-            rating: {
-              rate: 4.1,
-              count: 259,
-            },
-          },
-        ]}
+        data={products}
         renderItem={({ item }) => (
           <ProductCard
             product={item}
