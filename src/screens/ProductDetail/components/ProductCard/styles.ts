@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    marginTop: -10, // Para solapar un poco con la imagen
+    marginTop: -10,
     elevation: 5,
   },
   productName: {

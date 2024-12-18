@@ -46,7 +46,7 @@ const SignInScreen: React.FC = () => {
       if (resp?.error) {
         error();
       } else if (resp.payload) {
-        navigation.navigate(ROOT);
+        navigation.replace(ROOT);
       }
     } catch (e) {
       error();
@@ -58,7 +58,7 @@ const SignInScreen: React.FC = () => {
       <Text style={styles.title}>Iniciar sesión</Text>
 
       <Formik
-        initialValues={{ username: 'mor_2314', password: '83r5^_' }}
+        initialValues={{ username: '', password: '' }}
         validationSchema={validationSchema}
         onSubmit={_handleSubmit}>
         {({

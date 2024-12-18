@@ -23,8 +23,6 @@ import {
 import { setItem } from '../../utils/storage';
 import { USER_TOKEN } from '../../constants/common';
 import { AUTH } from '../../constants/screens';
-import { RootStackParamList } from '../../navigation/AppStack';
-import { AppStackParamList } from '../../navigation';
 
 interface IMyState {
   product: IState;
@@ -39,9 +37,9 @@ const ProductList: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const handleBack = () => {
-      setItem('', USER_TOKEN);
-      navigation.navigate(AUTH);
+    const handleBack = async () => {
+      await setItem(USER_TOKEN, '');
+      navigation.replace(AUTH);
     };
 
     navigation.setOptions({
