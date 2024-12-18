@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, Button, Alert, ScrollView } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { AppDispatch } from '../../state/store';
 import styles from './styles';
 import { AppStackParamList } from '../../navigation';
-import { AUTH } from '../../constants/screens';
+import { ROOT } from '../../constants/screens';
 import { AuthUser } from '../../types/User';
 import InputField from '../../components/Inputs/InputField';
+import { loginUser, IState } from '../../state/features/users/UserSlice';
+
+interface IMyState {
+  user: IState;
+}
 
 const validationSchema = Yup.object({
   username: Yup.string().required('El nombre de usuario es obligatorio'),
@@ -19,14 +26,21 @@ const validationSchema = Yup.object({
 });
 
 const SignInScreen: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const loading = useSelector((state: IMyState) => state.user.loading);
+  const dispatch = useDispatch<AppDispatch>();
+
   const navigation =
     useNavigation<NativeStackNavigationProp<AppStackParamList>>();
 
   const _handleSubmit = async (values: AuthUser) => {
     const { username, password } = values;
     try {
-      navigation.navigate(AUTH);
+      let credentials = { username, password };
+      dispatch(loginUser(credentials)).then(resp => {
+        if (resp) {
+          navigation.navigate(ROOT);
+        }
+      });
     } catch (error) {
       Alert.alert(
         'Error al autenticar el usuario',
