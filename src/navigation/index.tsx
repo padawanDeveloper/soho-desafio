@@ -4,6 +4,7 @@ import { ActivityIndicator } from 'react-native';
 
 import { AuthStack } from './AuthStack';
 import { AppStack } from './AppStack';
+import { AUTH_LOADING, AUTH, ROOT } from '../constants/screens';
 
 export type AppStackParamList = {
   Root: undefined;
@@ -12,21 +13,21 @@ export type AppStackParamList = {
 };
 
 const AppNavigator = createNativeStackNavigator({
-  initialRouteName: 'AuthLoading',
+  initialRouteName: AUTH_LOADING,
   screens: {
-    AuthLoading: {
+    [AUTH_LOADING]: {
       screen: ActivityIndicator,
       options: {
         headerShown: false,
       },
     },
-    Auth: {
+    [AUTH]: {
       screen: AuthStack,
       options: {
         headerShown: false,
       },
     },
-    Root: {
+    [ROOT]: {
       screen: AppStack,
       options: {
         headerShown: false,

@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Text, StyleSheet, SafeAreaView } from 'react-native';
+import { SIGNIN } from '../constants/screens';
 
 const Page = () => (
   <SafeAreaView style={styles.container}>
@@ -9,7 +10,7 @@ const Page = () => (
 
 export const AuthStack = createNativeStackNavigator({
   screens: {
-    Signin: Page,
+    [SIGNIN]: Page,
   },
 });
 
