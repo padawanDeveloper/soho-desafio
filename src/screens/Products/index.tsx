@@ -54,7 +54,7 @@ const ProductList: React.FC = () => {
   const handleSetCurrentProduct = (item: Product) => {
     navigation.navigate(PRODUCT_DETAIL, { product: item });
   };
-  console.log({ products });
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
