@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   rating: {
     fontSize: 12,
-    color: '#ffd700', // Gold color for rating
+    color: '#ffd700',
     marginTop: 5,
   },
 });
