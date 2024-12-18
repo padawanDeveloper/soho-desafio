@@ -1,23 +1,28 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { AuthUser } from '../../../types/User';
+import { auth } from '../../../api';
+import { setItem } from '../../../utils/storage';
+import { USER_TOKEN } from '../../../constants/common';
 
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (credentials: AuthUser) => {
-    // const response = await products.getProducts();
-    // return response.data;
-    return '';
+    const resp = await auth.login(credentials);
+    const { token } = resp.data;
+    console.log(token);
+    setItem(token, USER_TOKEN);
+    return token;
   },
 );
 
 export interface IState {
-  user: string;
+  user?: string;
   loading: boolean;
   error: undefined | string;
 }
 
 const initialState = {
-  user: '',
+  user: undefined,
   loading: false,
   error: undefined,
 } as IState;
@@ -32,7 +37,7 @@ const productsSlice = createSlice({
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.loading = false;
-      state.user = action?.payload ? action.payload : '';
+      state.user = action?.payload ? action.payload : undefined;
     });
     builder.addCase(loginUser.rejected, (state, action) => {
       state.loading = false;
