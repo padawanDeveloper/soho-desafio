@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const setItem = async (itemName: string, value: string) => {
   try {
-    return await AsyncStorage.setItem(itemName, value);
+    await AsyncStorage.setItem(itemName, value);
   } catch (e) {
     Alert.alert('Problemas con el token', 'Problema inesperado');
   }
