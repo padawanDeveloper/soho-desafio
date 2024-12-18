@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FlatList, SafeAreaView, View, ActivityIndicator } from 'react-native';
 
 import styles from './styles';
-import ProductCard from './components';
+import ProductCard from './components/ProductCard';
 import { Product } from '../../types/Product';
 
-const ProductList = () => {
-  const handleSetCurrentProduct = (item: Product) => {
+const ProductList: React.FC = () => {
+  const handleSetCurrentProduct = useCallback((item: Product) => {
     console.log(item);
-  };
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
