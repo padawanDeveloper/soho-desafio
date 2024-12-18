@@ -9,8 +9,8 @@ export const loginUser = createAsyncThunk(
   async (credentials: AuthUser) => {
     const resp = await auth.login(credentials);
     const { token } = resp.data;
-    console.log(token);
-    setItem(token, USER_TOKEN);
+
+    await setItem(USER_TOKEN, token);
     return token;
   },
 );

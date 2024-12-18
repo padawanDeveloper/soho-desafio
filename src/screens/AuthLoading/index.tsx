@@ -17,7 +17,7 @@ export const AuthLoadingScreen: React.FC = () => {
     const getData = async () => {
       try {
         const value = await getItem(USER_TOKEN);
-        if (value !== null) {
+        if (!!value) {
           navigation.replace(ROOT);
         } else {
           navigation.replace(AUTH);
