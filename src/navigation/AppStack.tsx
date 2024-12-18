@@ -15,7 +15,18 @@ export type RootStackParamList = {
 
 export const AppStack = createNativeStackNavigator({
   screens: {
-    [PRODUCTS]: Products,
-    [PRODUCT_DETAIL]: ProductDetail,
+    [PRODUCTS]: {
+      screen: Products,
+      options: {
+        title: 'SOHO APP',
+      },
+    },
+    [PRODUCT_DETAIL]: {
+      screen: ProductDetail,
+      options: {
+        title: '',
+        headerBackTitle: 'Atras',
+      },
+    },
   },
 });
