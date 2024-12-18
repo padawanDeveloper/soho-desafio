@@ -58,7 +58,7 @@ const SignInScreen: React.FC = () => {
       <Text style={styles.title}>Iniciar sesión</Text>
 
       <Formik
-        initialValues={{ username: 'mor_2314', password: '83r5^_' }}
+        initialValues={{ username: '', password: '' }}
         validationSchema={validationSchema}
         onSubmit={_handleSubmit}>
         {({
