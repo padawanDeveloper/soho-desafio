@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Text, StyleSheet, SafeAreaView } from 'react-native';
 
 import { PRODUCTS } from '../constants/screens';
+import { Products } from '../screens';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -15,7 +16,7 @@ const Page = () => (
 
 export const AppStack = createNativeStackNavigator({
   screens: {
-    [PRODUCTS]: Page,
+    [PRODUCTS]: Products,
   },
 });
 
