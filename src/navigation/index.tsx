@@ -1,22 +1,22 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStaticNavigation } from '@react-navigation/native';
-import { ActivityIndicator } from 'react-native';
 
 import { AuthStack } from './AuthStack';
 import { AppStack } from './AppStack';
 import { AUTH_LOADING, AUTH, ROOT } from '../constants/screens';
+import { AuthLoadingScreen } from '../screens';
 
 export type AppStackParamList = {
-  Root: undefined;
-  Auth: undefined;
-  AuthLoading: undefined;
+  [ROOT]: undefined;
+  [AUTH]: undefined;
+  [AUTH_LOADING]: undefined;
 };
 
 const AppNavigator = createNativeStackNavigator({
-  initialRouteName: AUTH_LOADING,
+  initialRouteName: ROOT,
   screens: {
     [AUTH_LOADING]: {
-      screen: ActivityIndicator,
+      screen: AuthLoadingScreen,
       options: {
         headerShown: false,
       },
