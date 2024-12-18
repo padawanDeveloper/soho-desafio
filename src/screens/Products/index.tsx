@@ -41,7 +41,7 @@ const ProductList: React.FC = () => {
   useEffect(() => {
     const handleBack = () => {
       setItem('', USER_TOKEN);
-      navigation.navigate(AUTH);
+      navigation.replace(AUTH);
     };
 
     navigation.setOptions({

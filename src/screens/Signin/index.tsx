@@ -46,7 +46,7 @@ const SignInScreen: React.FC = () => {
       if (resp?.error) {
         error();
       } else if (resp.payload) {
-        navigation.navigate(ROOT);
+        navigation.replace(ROOT);
       }
     } catch (e) {
       error();

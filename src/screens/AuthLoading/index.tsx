@@ -18,12 +18,12 @@ export const AuthLoadingScreen: React.FC = () => {
       try {
         const value = await getItem(USER_TOKEN);
         if (value !== null) {
-          navigation.navigate(ROOT);
+          navigation.replace(ROOT);
         } else {
-          navigation.navigate(AUTH);
+          navigation.replace(AUTH);
         }
       } catch (e) {
-        navigation.navigate(AUTH);
+        navigation.replace(AUTH);
       }
     };
     getData();
