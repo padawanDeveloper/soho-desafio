@@ -57,3 +57,10 @@ npm run ios
 # OR using Yarn
 yarn ios
 ```
+
+### User Credentials
+
+```
+username: 'mor_2314'
+password: '83r5^_'
+```
