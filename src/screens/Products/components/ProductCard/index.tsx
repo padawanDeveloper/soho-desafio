@@ -2,27 +2,26 @@ import React, { memo } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
+import { Product } from '../../../../types/Product';
 
-interface IProduct {
-  id: number;
-  image: string;
-  title: string;
-  price: number;
-}
-
-interface IProps {
-  product: IProduct;
+interface ProductCardProps {
+  product: Product;
   onPress: () => void;
 }
 
-const ProductCard = ({ product, onPress }: IProps) => (
-  <TouchableOpacity style={styles.card} onPress={onPress}>
-    <Image source={{ uri: product.image }} style={styles.image} />
-    <View style={styles.infoContainer}>
-      <Text style={styles.productName}>{product.title}</Text>
-      <Text style={styles.productPrice}>${product.price}</Text>
-    </View>
-  </TouchableOpacity>
-);
+const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
+  return (
+    <TouchableOpacity style={styles.card} onPress={onPress}>
+      <Image source={{ uri: product.image }} style={styles.image} />
+      <View style={styles.infoContainer}>
+        <Text style={styles.title} numberOfLines={1}>
+          {product.title}
+        </Text>
+        <Text style={styles.price}>${product.price}</Text>
+        <Text style={styles.rating}>{product.rating?.rate} ★</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 export default memo(ProductCard);

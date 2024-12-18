@@ -3,31 +3,36 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
-    borderRadius: 10,
-    margin: 10,
-    overflow: 'hidden',
+    borderRadius: 8,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
+    shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 5,
+    margin: 10,
+    width: 160,
+    overflow: 'hidden',
   },
   image: {
     width: '100%',
-    height: 200,
+    height: 120,
     resizeMode: 'cover',
   },
   infoContainer: {
     padding: 10,
   },
-  productName: {
+  title: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#333',
   },
-  productPrice: {
+  price: {
     fontSize: 14,
     color: '#888',
+    marginTop: 5,
+  },
+  rating: {
+    fontSize: 12,
+    color: '#ffd700',
     marginTop: 5,
   },
 });

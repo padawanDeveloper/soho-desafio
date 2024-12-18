@@ -76,6 +76,7 @@ const ProductList: React.FC = () => {
         )}
         keyExtractor={(item: Product) => String(item.id)}
         contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
+        numColumns={2}
       />
     </SafeAreaView>
   );
